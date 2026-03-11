@@ -1,0 +1,47 @@
+{
+  "name": "warmup-cli",
+  "version": "1.0.0",
+  "description": "Pre-warm your Claude rate limits while you sleep. One command, zero daily effort.",
+  "main": "dist/index.js",
+  "bin": {
+    "warmup": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "start": "node dist/index.js",
+    "test": "ts-node test/run.ts"
+  },
+  "keywords": [
+    "claude",
+    "anthropic",
+    "rate-limit",
+    "cli",
+    "developer-tools",
+    "productivity"
+  ],
+  "author": "Mohit",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^11.1.0",
+    "inquirer": "^8.2.6",
+    "ora": "^5.4.1",
+    "boxen": "^5.1.2",
+    "figures": "^3.2.0",
+    "gradient-string": "^2.0.2"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^8.2.10",
+    "@types/gradient-string": "^1.1.6",
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "files": [
+    "dist/**/*"
+  ]
+}
