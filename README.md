@@ -1,13 +1,19 @@
 <div align="center">
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Food/Hot%20Beverage.png" alt="WarmUp Logo" width="100" />
 
-# ☕ warmup
+  # ☕ WarmUp
 
-**Pre-warm your Claude rate limits while you sleep.**<br>
-*One command. Zero daily effort. Full Claude capacity when you need it.*
+  **Pre-warm your Claude rate limits while you sleep.**
+  
+  *One command. Zero daily effort. Full Claude capacity precisely when you need it.*
 
-[![npm version](https://img.shields.io/npm/v/@mohitkumawat/warmup-cli.svg?style=for-the-badge&color=6C5CE7)](https://www.npmjs.com/package/@mohitkumawat/warmup-cli)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge&color=00B894)](https://opensource.org/licenses/MIT)
+  <br />
 
+  [![npm version](https://img.shields.io/npm/v/@mohitkumawat/warmup-cli?style=for-the-badge&color=FF4F00&logo=npm)](https://www.npmjs.com/package/@mohitkumawat/warmup-cli)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge&color=00B894)](https://opensource.org/licenses/MIT)
+  [![Downloads](https://img.shields.io/npm/dt/@mohitkumawat/warmup-cli?style=for-the-badge&color=6C5CE7)](https://www.npmjs.com/package/@mohitkumawat/warmup-cli)
+
+  <br />
 </div>
 
 ---
@@ -18,77 +24,88 @@ Claude Pro and Max subscribers share a **5-hour rolling rate limit window** acro
 
 ## 🟢 The Solution
 
-**`warmup`** starts your rate limit window _before_ you wake up by scheduling one tiny Claude Code ping (~10 tokens) at the exact right time.
+**`warmup`** starts your rate limit window *before* you wake up by scheduling one tiny Claude Code ping (~10 tokens) at the exact right time.
 
 By the time you sit down to work, the window is perfectly timed to expire exactly when you need it, granting you a **100% fresh allocation** right in the middle of your workday.
 
-> **Without warmup:**
-> 10:00 AM → You start working, window starts.
-> 12:00 PM → Rate limited! Must wait until 3:00 PM.
-> 
-> **With warmup (2-hour exhaustion):**
->  7:00 AM → warmup sends one tiny ping (window starts).
-> 10:00 AM → You start working using the active window.
-> 12:00 PM → You exhaust your limits, BUT the 7:00 AM window ends right now!
-> 12:00 PM → Window resets instantly. Full capacity continues.
+### ⏱️ Side-by-Side Comparison
 
-*You just saved 3 hours of waiting.*
+| ❌ Without `warmup` | ✅ With `warmup` (2-hour exhaustion) |
+| :--- | :--- |
+| **10:00 AM** → You start working, window starts. | **7:00 AM** → `warmup` sends one tiny ping (window starts). |
+| **12:00 PM** → **Rate limited!** 🛑 Must wait until 3:00 PM. | **10:00 AM** → You start working using the active window. |
+| **1:00 PM** → Still waiting... ⏳ | **12:00 PM** → You exhaust your limits, BUT the 7:00 AM window ends right now! |
+| **2:00 PM** → Still waiting... ⏳ | **12:01 PM** → **Window resets instantly.** 🚀 Full capacity continues. |
+
+> ***You just saved over 3 hours of waiting.***
 
 ---
 
-## ⚡ Install
+## ⚡ Installation
 
 ```bash
 npm install -g @mohitkumawat/warmup-cli
 ```
-*Prerequisites: [Claude Code](https://code.claude.com) must be installed and authenticated.*
+
+> **Note:** *Prerequisites: [Claude Code](https://code.claude.com) must be installed and authenticated.*
+
+---
 
 ## 🚀 Quick Start
+
+Run the following command anywhere in your terminal:
 
 ```bash
 warmup
 ```
 
-Fresh installs open a **guided onboarding wizard**. 
+*Fresh installs open a **guided onboarding wizard**.*
 
-### 🔍 What happens
-* Shows the exact background command (`claude -p ping --max-turns 1`) transparently.
-* Asks about your typical work schedule.
-* Shows a detailed geometric preview of the scheduled timeline before explicitly asking for confirmation.
-* Stores config and logs purely locally in `~/.warmup/`.
+### 🔍 What happens behind the scenes?
 
-### 🛡 What DOES NOT happen
-* Setup does **not** send a live Claude request or burn any limits.
-* `warmup` does **not** proxy your session, extract tokens, or phone home to any backend api.
+- 📜 Shows the exact background command (`claude -p ping --max-turns 1`) transparently.
+- 🕒 Asks about your typical work schedule.
+- 📊 Shows a detailed geometric preview of the scheduled timeline before explicitly asking for confirmation.
+- 💾 Stores config and logs purely locally in `~/.warmup/`.
+
+### 🛡 What DOES NOT happen?
+
+- ❌ Setup does **not** send a live Claude request or burn any limits.
+- ❌ `warmup` does **not** proxy your session, extract tokens, or phone home to any backend API. Privacy first.
 
 ---
 
 ## 🧠 Smart Setup
 
-We don't ask you to do modulo-math to figure out your 5-hour window. `warmup` asks you two plain-English questions:
-1. **When do you start working?** (e.g., 9:00 AM)
-2. **How quickly do you exhaust limits?** (e.g., 1-2 hours)
+We don't ask you to do modulo-math to figure out your 5-hour window. `warmup` simply asks you two plain-English questions:
+
+1. **When do you start working?** *(e.g., 9:00 AM)*
+2. **How quickly do you exhaust limits?** *(e.g., 1-2 hours)*
 
 It then automatically calculates the **exact optimal pre-warm time** to ensure your rate limit resets exactly the minute you run out of messages.
+
+---
 
 ## 🛡️ Bulletproof Boot-Recovery
 
 **What if my computer is off or asleep at the scheduled pre-warm time?**
 
-`warmup` handles this automatically using native OS features. If your laptop was closed at your 5:00 AM pre-warm time, the pre-warm fires **immediately upon waking your machine** (e.g., at 8:00 AM). 
+`warmup` handles this automatically using native OS features. If your laptop was closed at your 5:00 AM pre-warm time, the pre-warm fires **immediately upon waking your machine** (e.g., at 8:00 AM).
 
 It has built-in deduplication guards: it will *never* double-fire or accidentally consume a second rate-limit window, even if you restart your computer 10 times a day.
 
-* **macOS:** `launchd` via `RunAtLoad`
-* **Linux:** `systemd` timers via `Persistent=true`
-* **Windows:** `schtasks` via `StartWhenAvailable`
+| OS | Background Mechanism |
+| :--- | :--- |
+| 🍎 **macOS** | `launchd` via `RunAtLoad` |
+| 🐧 **Linux** | `systemd` timers via `Persistent=true` |
+| 🪟 **Windows** | `schtasks` via `StartWhenAvailable` |
 
 ---
 
-## 🛠️ Commands
+## 🛠️ Commands Reference
 
 | Command | Description |
-|---------|-------------|
+| :--- | :--- |
 | `warmup setup` | Smart interactive setup wizard |
 | `warmup status` | Show schedule and live window progress bar |
 | `warmup test` | Fire a pre-warm right now |

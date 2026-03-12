@@ -422,9 +422,9 @@ function testReadmeQuickStartCopy(): void {
 
   assert.match(readme, /npm install -g @mohitkumawat\/warmup-cli/);
   assert.match(readme, /```bash\nwarmup\n```/);
-  assert.match(readme, /## What happens/);
+  assert.match(readme, /What happens/i);
   assert.match(readme, /claude -p ping --max-turns 1/);
-  assert.match(readme, /## What does not happen/);
+  assert.match(readme, /What DOES NOT happen/i);
   assert.match(readme, /warmup setup/);
 }
 
