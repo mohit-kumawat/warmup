@@ -11,7 +11,7 @@ const SYSTEMD_USER_DIR = path.join(os.homedir(), '.config', 'systemd', 'user');
 const SERVICE_PATH = path.join(SYSTEMD_USER_DIR, `${SERVICE_NAME}.service`);
 const TIMER_PATH = path.join(SYSTEMD_USER_DIR, `${SERVICE_NAME}.timer`);
 
-type LinuxSchedulerBackend = 'systemd' | 'cron';
+export type LinuxSchedulerBackend = 'systemd' | 'cron';
 
 function getWarmupScriptPath(): string {
   return path.join(os.homedir(), '.warmup', 'warmup.sh');
@@ -85,6 +85,20 @@ export function determineLinuxSchedulerBackend(
   if (systemdUsable) return 'systemd';
   if (crontabAvailable) return 'cron';
   throw new Error('Neither a usable user systemd session nor crontab is available on this system.');
+}
+
+export function detectLinuxSchedulerBackend(): LinuxSchedulerBackend {
+  return determineLinuxSchedulerBackend(
+    hasUsableSystemdUserSession(),
+    hasCrontab(),
+  );
+}
+
+export function getLinuxSchedulerName(): string {
+  const backend = detectLinuxSchedulerBackend();
+  return backend === 'systemd'
+    ? 'Linux (systemd user timer)'
+    : 'Linux (cron)';
 }
 
 export function buildLinuxWarmupScript(runtime: ScheduleInstallOptions['runtime']): string {
@@ -184,10 +198,7 @@ function installCronSchedule(options: ScheduleInstallOptions): void {
 }
 
 export function installLinuxSchedule(options: ScheduleInstallOptions): void {
-  const backend = determineLinuxSchedulerBackend(
-    hasUsableSystemdUserSession(),
-    hasCrontab(),
-  );
+  const backend = detectLinuxSchedulerBackend();
 
   if (backend === 'systemd') {
     installSystemdSchedule(options);

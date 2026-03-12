@@ -15,7 +15,7 @@ Claude Pro and Max subscribers share a **5-hour rolling rate limit window** acro
 
 ## 🟢 The Solution
 
-**warmup** starts your rate limit window _before_ you wake up by sending a tiny invisible message (~10 tokens) through Claude Code at a scheduled time. 
+**warmup** starts your rate limit window _before_ you wake up by scheduling one tiny Claude Code ping (~10 tokens) at the right time.
 
 By the time you sit down to work, the window is perfectly timed to expire exactly when you need it, granting you a **100% fresh allocation** right in the middle of your workday.
 
@@ -25,7 +25,7 @@ By the time you sit down to work, the window is perfectly timed to expire exactl
   12:00 PM → Rate limited! Must wait until 3:00 PM
 
 ✔ With Smart warmup (2-hour exhaustion):
-   7:00 AM → warmup sends invisible "ping"
+   7:00 AM → warmup sends one tiny Claude Code ping
   10:00 AM → You start working using the active window.
   12:00 PM → You exhaust your limits. BUT the 7:00 AM window ends right now!
   12:00 PM → Window resets instantly! Full capacity continues.
@@ -42,6 +42,32 @@ npm install -g @mohitkumawat/warmup-cli
 
 **Prerequisites:** [Claude Code](https://code.claude.com) must be installed and authenticated.
 
+## 🚀 Quick Start
+
+```bash
+warmup
+```
+
+Fresh installs now open a guided first-run flow. If you want to skip straight to the wizard, `warmup setup` still works too.
+
+## What happens
+
+- `warmup` shows the exact scheduled Claude command before it installs anything:
+
+```bash
+claude -p ping --max-turns 1
+```
+
+- Setup checks Claude Code install + auth, asks about your work start time and how fast you hit limits, then shows an install preview before saving anything.
+- Config and logs stay local in `~/.warmup/`.
+- The scheduler runs locally through native OS tooling.
+
+## What does not happen
+
+- Setup does **not** send a live Claude request or start your 5-hour window.
+- `warmup` does **not** extract tokens, proxy your session, or depend on a backend service.
+- Nothing is installed until you confirm the schedule preview.
+
 ## 🧠 Smart Setup
 
 We don't ask you to do modulo-math to figure out your 5-hour window. `warmup` uses a **Smart Scheduler**.
@@ -56,7 +82,7 @@ Just tell it:
 
 `warmup` automatically calculates the **exact optimal pre-warm time** to ensure your rate limit resets exactly the minute you run out of messages. 
 
-That's it. The OS scheduler installs it in the background. You'll never touch it again.
+Then it shows an install preview with your schedule, expected reset time, local file paths, and scheduler backend before installing the OS-native task.
 
 ## 🛡️ Bulletproof Boot-Recovery
 

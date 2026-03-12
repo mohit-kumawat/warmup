@@ -39,6 +39,10 @@ export function getConfigDir(): string {
   return CONFIG_DIR;
 }
 
+export function getConfigFilePath(): string {
+  return CONFIG_FILE;
+}
+
 export function getLogsDir(): string {
   return LOGS_DIR;
 }

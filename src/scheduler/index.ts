@@ -1,6 +1,6 @@
 import * as os from 'os';
 import { installMacSchedule, uninstallMacSchedule, isMacScheduleInstalled, pauseMacSchedule, resumeMacSchedule } from './macos';
-import { installLinuxSchedule, uninstallLinuxSchedule, isLinuxScheduleInstalled, pauseLinuxSchedule, resumeLinuxSchedule } from './linux';
+import { installLinuxSchedule, uninstallLinuxSchedule, isLinuxScheduleInstalled, pauseLinuxSchedule, resumeLinuxSchedule, getLinuxSchedulerName } from './linux';
 import { installWindowsSchedule, uninstallWindowsSchedule, isWindowsScheduleInstalled, pauseWindowsSchedule, resumeWindowsSchedule } from './windows';
 import type { RuntimePaths } from '../runtime';
 
@@ -24,6 +24,22 @@ export function getPlatformName(): string {
     case 'macos': return 'macOS (launchd)';
     case 'linux': return 'Linux (systemd/cron)';
     case 'windows': return 'Windows (Task Scheduler)';
+  }
+}
+
+export function getSchedulerName(): string {
+  const platform = detectPlatform();
+  switch (platform) {
+    case 'macos':
+      return 'macOS (launchd LaunchAgent)';
+    case 'linux':
+      try {
+        return getLinuxSchedulerName();
+      } catch {
+        return 'Linux (systemd user timer or cron)';
+      }
+    case 'windows':
+      return 'Windows (Task Scheduler)';
   }
 }
 

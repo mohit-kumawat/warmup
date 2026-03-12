@@ -37,7 +37,8 @@
     "ora": "^5.4.1",
     "boxen": "^5.1.2",
     "figures": "^3.2.0",
-    "gradient-string": "^2.0.2"
+    "gradient-string": "^2.0.2",
+    "string-width": "^4.2.3"
   },
   "devDependencies": {
     "@types/inquirer": "^8.2.10",
