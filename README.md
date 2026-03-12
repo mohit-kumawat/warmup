@@ -48,7 +48,7 @@ npm install -g @mohitkumawat/warmup-cli
 warmup
 ```
 
-Fresh installs now open a guided first-run flow. If you want to skip straight to the wizard, `warmup setup` still works too.
+Fresh installs now open a **guided onboarding wizard**. If you want to skip straight to the wizard later, `warmup setup` still works too.
 
 ## What happens
 
