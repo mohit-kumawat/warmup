@@ -199,18 +199,10 @@ function toDisplayPath(target: string): string {
 
 // ── Logo / Brand ──
 export function printLogo(): void {
-  const logo = `
-  _    _
- | |  | |
- | |  | | __ _ _ __ _ __ ___  _   _ _ __
- | |  | |/ _\` | '__| '_ \` _ \\| | | | '_ \\
- | |__| | (_| | |  | | | | | | |_| | |_) |
-  \\____/ \\__,_|_|  |_| |_| |_|\\__,_| .__/
-                                    | |
-                                    |_|
-`;
-  console.log(BRAND(logo));
-  console.log(DIM('  Pre-warm your Claude rate limits while you sleep.\n'));
+  const title = BRAND('\n  WarmUp\n');
+  const subtitle = DIM('  Pre-warm your Claude rate limits while you sleep.\n');
+  console.log(title);
+  console.log(subtitle);
 }
 
 export function renderMiniLogoLines(): string[] {
