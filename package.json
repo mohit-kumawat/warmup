@@ -1,6 +1,6 @@
 {
   "name": "warmup-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pre-warm your Claude rate limits while you sleep. One command, zero daily effort.",
   "main": "dist/index.js",
   "bin": {
