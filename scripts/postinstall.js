@@ -15,17 +15,32 @@ const cyan = '\x1b[36m';
 
 const message = `
 ${bright}${green}WarmUp CLI has been installed successfully!${reset}
-
-To finish the setup and start pre-warming Claude, please run:
-${bright}${yellow}  warmup setup${reset}
-
-${bright}${cyan}Why run setup?${reset}
-- It configures your daily work schedule.
-- It calculates the optimal 5-hour window.
-- It installs the background scheduler for your OS.
-
-${bright}Note:${reset} Ensure Claude Code is already installed and authenticated.
-Check the docs at: ${cyan}https://github.com/mohit-kumawat/warmup${reset}
+Starting initial setup...
 `;
 
 process.stdout.write(message);
+
+// Automatically trigger "warmup setup" if we are in an interactive terminal
+if (process.stdout.isTTY) {
+  try {
+    const { execSync } = require('child_process');
+    
+    // We run it synchronously so the user is immediately dropped into the setup prompt
+    execSync('warmup setup', { stdio: 'inherit' });
+  } catch (err) {
+    // If the warmup command isn't immediately available or fails, fallback to instructions
+    const fallbackMessage = `
+${bright}${yellow}Could not automatically start setup.${reset}
+To finish the setup and start pre-warming Claude, please run:
+${bright}${cyan}  warmup setup${reset}
+`;
+    process.stdout.write(fallbackMessage);
+  }
+} else {
+  // CI/CD or non-interactive environments
+  const fallbackMessage = `
+To finish the setup and start pre-warming Claude, please run:
+${bright}${yellow}  warmup setup${reset}
+`;
+  process.stdout.write(fallbackMessage);
+}
