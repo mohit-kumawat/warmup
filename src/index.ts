@@ -17,7 +17,7 @@ export function createProgram(): Command {
   program
     .name('warmup')
     .description('Pre-warm your Claude rate limits while you sleep.')
-    .version('1.0.0');
+    .version("1.2.9");;
 
   program
     .command('setup')
