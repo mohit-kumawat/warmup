@@ -11,7 +11,7 @@
 
   [![npm version](https://img.shields.io/npm/v/@mohitkumawat/warmup-cli?style=for-the-badge&color=FF4F00&logo=npm)](https://www.npmjs.com/package/@mohitkumawat/warmup-cli)
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge&color=00B894)](https://opensource.org/licenses/MIT)
-  [![Downloads](https://img.shields.io/npm/dt/@mohitkumawat/warmup-cli?style=for-the-badge&color=6C5CE7)](https://www.npmjs.com/package/@mohitkumawat/warmup-cli)
+  [![Stars](https://img.shields.io/github/stars/mohit-kumawat/warmup?style=for-the-badge&color=6C5CE7&logo=github)](https://github.com/mohit-kumawat/warmup)
 
   <br />
 </div>
