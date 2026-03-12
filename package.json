@@ -9,6 +9,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "ts-node src/index.ts",
+    "postinstall": "node scripts/postinstall.js",
     "start": "node dist/index.js",
     "test": "ts-node test/run.ts"
   },
@@ -51,7 +52,8 @@
     "node": ">=16.0.0"
   },
   "files": [
-    "dist/**/*"
+    "dist/**/*",
+    "scripts/postinstall.js"
   ],
   "directories": {
     "test": "test"
