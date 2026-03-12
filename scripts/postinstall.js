@@ -20,27 +20,28 @@ Starting initial setup...
 
 process.stdout.write(message);
 
-// Automatically trigger "warmup setup" if we are in an interactive terminal
-if (process.stdout.isTTY) {
-  try {
-    const { execSync } = require('child_process');
-    
-    // We run it synchronously so the user is immediately dropped into the setup prompt
+// Automatically trigger "warmup setup" if possible
+try {
+  const { execSync } = require('child_process');
+  const fs = require('fs');
+  
+  // npm often pipes stdout/stderr during postinstall, obscuring interactive prompts.
+  // By reading/writing directly to the TTY device, we ensure the prompt is visible.
+  if (fs.existsSync('/dev/tty')) {
+    const tty = fs.openSync('/dev/tty', 'r+');
+    execSync('warmup setup', { stdio: [tty, tty, tty] });
+  } else if (process.stdout.isTTY) {
+    // Fallback for Windows or environments without /dev/tty but with interactive stdout
     execSync('warmup setup', { stdio: 'inherit' });
-  } catch (err) {
-    // If the warmup command isn't immediately available or fails, fallback to instructions
-    const fallbackMessage = `
+  } else {
+    throw new Error('No interactive terminal available');
+  }
+} catch (err) {
+  // If the warmup command isn't immediately available, fails, or we're in CI
+  const fallbackMessage = `
 ${bright}${yellow}Could not automatically start setup.${reset}
 To finish the setup and start pre-warming Claude, please run:
 ${bright}${cyan}  warmup setup${reset}
-`;
-    process.stdout.write(fallbackMessage);
-  }
-} else {
-  // CI/CD or non-interactive environments
-  const fallbackMessage = `
-To finish the setup and start pre-warming Claude, please run:
-${bright}${yellow}  warmup setup${reset}
 `;
   process.stdout.write(fallbackMessage);
 }

@@ -32,21 +32,21 @@
   },
   "homepage": "https://github.com/mohit-kumawat/warmup#readme",
   "dependencies": {
+    "boxen": "^5.1.2",
     "chalk": "^4.1.2",
     "commander": "^11.1.0",
-    "inquirer": "^8.2.6",
-    "ora": "^5.4.1",
-    "boxen": "^5.1.2",
     "figures": "^3.2.0",
     "gradient-string": "^2.0.2",
+    "inquirer": "^8.2.6",
+    "ora": "^5.4.1",
     "string-width": "^4.2.3"
   },
   "devDependencies": {
-    "@types/inquirer": "^8.2.10",
     "@types/gradient-string": "^1.1.6",
+    "@types/inquirer": "^8.2.10",
     "@types/node": "^20.11.0",
-    "typescript": "^5.3.3",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
   },
   "engines": {
     "node": ">=16.0.0"
