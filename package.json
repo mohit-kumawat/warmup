@@ -22,6 +22,14 @@
   ],
   "author": "Mohit",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohit-kumawat/warmup.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mohit-kumawat/warmup/issues"
+  },
+  "homepage": "https://github.com/mohit-kumawat/warmup#readme",
   "dependencies": {
     "chalk": "^4.1.2",
     "commander": "^11.1.0",
