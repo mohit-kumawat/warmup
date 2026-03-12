@@ -25,9 +25,9 @@ By the time you sit down to work, the window is perfectly timed to expire exactl
   12:00 PM → Rate limited! Must wait until 3:00 PM
 
 ✔ With Smart warmup (2-hour exhaustion):
-   5:00 AM → warmup sends invisible "ping"
-  10:00 AM → You start working.
-  12:00 PM → You exhaust your limits. BUT the 5:00 AM window ends right now!
+   7:00 AM → warmup sends invisible "ping"
+  10:00 AM → You start working using the active window.
+  12:00 PM → You exhaust your limits. BUT the 7:00 AM window ends right now!
   12:00 PM → Window resets instantly! Full capacity continues.
 ```
 *You just saved 3 hours of waiting.*
@@ -37,7 +37,7 @@ By the time you sit down to work, the window is perfectly timed to expire exactl
 ## ⚡ Install
 
 ```bash
-npm install -g warmup-cli
+npm install -g @mohitkumawat/warmup-cli
 ```
 
 **Prerequisites:** [Claude Code](https://code.claude.com) must be installed and authenticated.
