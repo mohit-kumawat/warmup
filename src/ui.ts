@@ -506,15 +506,22 @@ export async function animateBootRecoverySuccess(resetTime: string): Promise<voi
 }
 
 // ── Test Animation ──
-export async function animateTestWarmup(): Promise<void> {
+export async function animateTestWarmup(isDryRun: boolean = false): Promise<void> {
   console.log('');
-  console.log(`  ${ACCENT('⚡')} Sending test pre-warm...`);
+  const label = isDryRun ? DIM('[Dry Run]') : ACCENT('⚡');
+  console.log(`  ${label} Sending ${isDryRun ? 'simulated ' : '' }test pre-warm...`);
   await sleep(500);
 }
 
-export async function animateTestSuccess(duration: number): Promise<void> {
-  console.log(`  ${SUCCESS(figures.tick)} ${SUCCESS.bold('Pre-warm sent!')} ${DIM(`(${duration}ms)`)}`);
-  console.log(`  ${DIM('This counted as a real pre-warm and started your rate limit window.')}`);
+export async function animateTestSuccess(duration: number, isDryRun: boolean = false): Promise<void> {
+  const label = isDryRun ? DIM('[Dry Run]') : SUCCESS(figures.tick);
+  console.log(`  ${label} ${SUCCESS.bold('Pre-warm ' + (isDryRun ? 'simulated!' : 'sent!'))} ${DIM(`(${duration}ms)`)}`);
+  
+  if (isDryRun) {
+    console.log(`  ${DIM('No real request was sent. Your rate limit window was NOT affected.')}`);
+  } else {
+    console.log(`  ${DIM('This counted as a real pre-warm and started your rate limit window.')}`);
+  }
   console.log('');
 }
 

@@ -36,12 +36,14 @@ export function createProgram(): Command {
   program
     .command('test')
     .description('Fire a pre-warm right now (counts as a real pre-warm)')
-    .action(async () => {
-      await testCommand();
+    .option('--dry-run', 'Simulate the pre-warm without sending a real request')
+    .action(async (options) => {
+      await testCommand(options);
     });
 
   program
     .command('pause')
+    .alias('stop')
     .description('Pause the daily pre-warm schedule')
     .action(async () => {
       await pauseCommand();

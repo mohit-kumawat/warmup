@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.14] - 2026-03-13
+
+### Added
+- **Dry-Run Mode:** Added `--dry-run` to `warmup test` to simulate pre-warms without consuming rate limit capacity.
+- **Improved Aliases:** Added `stop` as an alias for the `pause` command for better UX intuition.
+
+### Changed
+- **Professional Post-Install:** Removed aggressive TTY/automatic setup from the global install process. Setup is now manual and non-intrusive.
+- **Improved Test Feedback:** Refined test command animations and added clear status indicators.
+
+### Fixed
+- **NPM Install Hang:** Resolved the issue where global installations would hang during the background setup prompt.
+
 ## [1.2.13] - 2026-03-12
 
 ### Fixed

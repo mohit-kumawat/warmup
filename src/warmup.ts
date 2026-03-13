@@ -63,11 +63,20 @@ export interface WarmupResult {
 }
 
 /** Execute the pre-warm: send a minimal message through Claude Code */
-export function executeWarmup(isBootRecovery: boolean = false): WarmupResult {
+export function executeWarmup(isBootRecovery: boolean = false, dryRun: boolean = false): WarmupResult {
   const config = readConfig();
   const startTime = Date.now();
   const timezone = config?.schedule.timezone || 'UTC';
   const claudeBinary = config?.runtime?.claudePath || 'claude';
+
+  if (dryRun) {
+    return {
+      success: true,
+      message: 'Dry run completed successfully (no request sent)',
+      duration: 5,
+      isBootRecovery,
+    };
+  }
 
   try {
     const result = spawnSync(claudeBinary, ['-p', 'ping', '--max-turns', '1'], {
