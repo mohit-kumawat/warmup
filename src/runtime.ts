@@ -1,4 +1,5 @@
 import * as path from 'path';
+import * as fs from 'fs';
 import { spawnSync } from 'child_process';
 
 export interface RuntimePaths {
@@ -62,9 +63,23 @@ export function resolveRuntimePaths(cliEntry: string = process.argv[1]): Runtime
     throw new Error('Claude Code not found in PATH.');
   }
 
+  let resolvedCliEntry: string;
+  try {
+    resolvedCliEntry = fs.realpathSync(path.resolve(cliEntry));
+  } catch {
+    resolvedCliEntry = path.resolve(cliEntry);
+  }
+
+  let resolvedNodePath: string;
+  try {
+    resolvedNodePath = fs.realpathSync(process.execPath);
+  } catch {
+    resolvedNodePath = path.resolve(process.execPath);
+  }
+
   return {
-    nodePath: path.resolve(process.execPath),
-    cliEntry: path.resolve(cliEntry),
+    nodePath: resolvedNodePath,
+    cliEntry: resolvedCliEntry,
     claudePath,
   };
 }
